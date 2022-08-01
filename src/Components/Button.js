@@ -1,32 +1,33 @@
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight } from "react-native";
-import React from "react";
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { Button as PaperButton } from 'react-native-paper'
+import { theme } from '../style/theme'
 
-// Create a Button instance 
-
-const Button = ({ text, onPress }) => {
+export default function Button({ mode, style, ...props }) {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.btnStyle} >
-      <Text style={styles.textStyle}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
-
-export default Button;
+    <PaperButton
+      style={[
+        styles.button,
+        mode === 'outlined' && { backgroundColor: theme.colors.surface },
+        style,
+      ]}
+      labelStyle={styles.text}
+      mode={mode}
+      {...props}
+    />
+  )
+}
 
 const styles = StyleSheet.create({
-  btnStyle: {
-    height: 48,
-    borderWidth: 1,
-    backgroundColor: "blue",
-    alignItems: "center",
-    textAlign: "center",
-    justifyContent: "center",
+  button: {
+    width: '100%',
+    marginVertical: 10,
+    paddingVertical: 2,
     borderRadius: 10,
   },
-  textStyle: {
-    fontSize: 16,
-    textTransform: "uppercase",
-    fontWeight: "bold",
-    color: "white",
+  text: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    lineHeight: 26,
   },
-});
+})

@@ -1,39 +1,40 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  ScrollView,
-} from "react-native";
-import React, { useState } from "react";
-import Button from "../../Components/Button";
-import { popUpError } from "../Ultis/PopupWarning";
+import React from 'react'
+import { useDispatch, } from 'react-redux'
+import Header from '../../Components/Header'
+import Button from '../../Components/Button'
+import { logout } from '../../Redux/thunks'
+import { StyleSheet, Text, View } from 'react-native'
 
-const Logout = ({ navigation }) => {
-// Click to Logout
-  const onLogOut = () => {
-      navigation.navigate("Login Screen");
-  };
-
-  // Logout Screen
+export default function Logout({ navigation }) {
+  const dispatch = useDispatch()
+  const onLogoutPressed = () => {
+    dispatch(
+      logout({})
+    )
+  }
   return (
     <View style={styles.container}>
-      <SafeAreaView>
-        <ScrollView>
-          <Button text={"Logout"} onPress={onLogOut} />
-        </ScrollView>
-      </SafeAreaView>
+      <Header>Press To Logout</Header>
+      <Button
+        mode="outlined"
+        onPress={onLogoutPressed}
+        backgroundColor="blue"
+        color = "white"
+      >
+        Logout
+      </Button>
     </View>
-  );
-};
+  )
+}
+
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "white",
-  },
-});
-
-export default Logout;
+  container:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+      padding: 24,
+      backgroundColor: "white",
+  }
+})

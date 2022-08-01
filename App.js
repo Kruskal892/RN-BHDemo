@@ -1,19 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import 'react-native-gesture-handler';
 import React from 'react'
-import Routes from './src/Navigations/Route'
-import FlashMessage from "react-native-flash-message";
+import { Provider } from 'react-redux'
+import { theme } from './src/style/theme'
+import store, { persistor } from './src/Redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+import Navigations from './src/Navigations/Navigations';
 
-
-const App = () => {
+export default function App() {
   return (
-    <View style= {{flex:1 }}>
-    <Routes/>
-    <FlashMessage 
-      position={'top'}
-    />
-    </View>
-  );
-};
-
-export default App
-
+    <Provider theme={theme} store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Navigations />
+      </PersistGate>
+    </Provider>
+  )
+}
