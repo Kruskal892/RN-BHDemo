@@ -1,38 +1,59 @@
-import React, { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { ActivityIndicator,  StyleSheet, Text, View  } from 'react-native'
-import { useFormik } from 'formik';
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { useFormik } from "formik";
 import * as yup from "yup";
-import Header from '../../Components/Header'
-import Button from '../../Components/Button'
-import TextInput from '../../Components/TextInput'
-import { loginSuccess } from '../../Redux/redux';
-import { login } from '../../Redux/actions';
+import Header from "../../Components/Header";
+import Button from "../../Components/Button";
+import TextInput from "../../Components/TextInput";
+import { loginSuccess } from "../../Redux/redux";
+import { login } from "../../Redux/actions";
+// import validationSchema from '../../Constants/Validations';
 export default function Login({ navigation }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   const validationSchema = yup.object().shape({
-    username: yup.string().required("Username can not be empty").min(2, "Password longer than 2 characters"),
-    password: yup.string().min(5).required("Password can not be empty").min(6, "Password longer than 6 characters"),
+    username: yup
+      .string()
+      .required("Username can not be empty")
+      .min(2, "Password longer than 2 characters"),
+    password: yup
+      .string()
+      .min(5)
+      .required("Password can not be empty")
+      .min(6, "Password longer than 6 characters"),
   });
-  const { values, handleChange, handleBlur, handleSubmit, touched, errors, setFieldValue } = useFormik({
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    touched,
+    errors,
+    setFieldValue,
+  } = useFormik({
     initialValues: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
     onSubmit: () => {
-      setIsLoading(true)
-      setTimeout(() => dispatch(
+      setIsLoading(true);
+      dispatch(
         login({
           name: values.username,
           password: values.password,
           loggedIn: true,
         })
-      ), 1000)
-      if (values.username && values.password && values.username === 'minh123' && values.password === '123456') {
+      );
+      if (
+        values.username &&
+        values.password &&
+        values.username === "minh123" &&
+        values.password === "123456"
+      ) {
       } else {
-        setIsLoading(false)
-        alert('Name or password incorrect')
+        setIsLoading(false);
+        alert("Name or password is incorrect");
       }
     },
     validationSchema,
@@ -44,10 +65,10 @@ export default function Login({ navigation }) {
         label="name"
         placeholder="Username"
         value={values.username}
-        onChangeText={useCallback(handleChange('username'), [])}
+        onChangeText={useCallback(handleChange("username"), [])}
         autoCompleteType="name"
         errorText={errors.username}
-        onBlur={handleBlur('username')}
+        onBlur={handleBlur("username")}
         touched={touched.username}
       />
       <TextInput
@@ -55,29 +76,27 @@ export default function Login({ navigation }) {
         placeholder="Password"
         returnKeyType="done"
         value={values.password}
-        onChangeText={useCallback(handleChange('password'), [])}
+        onChangeText={useCallback(handleChange("password"), [])}
         secureTextEntry
         errorText={errors.password}
-        onBlur={handleBlur('password')}
+        onBlur={handleBlur("password")}
         touched={touched.password}
       />
-     
-        <Button title='Submit' mode="contained" onPress={handleSubmit}>
-          Login
-        </Button>
-      
+
+      <Button title="Submit" mode="contained" onPress={handleSubmit}>
+        Login
+      </Button>
     </View>
-  )
+  );
 }
 
-
 const styles = StyleSheet.create({
-  container:{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
-      padding: 24,
-      backgroundColor: "white",
-  }
-})
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+    padding: 24,
+    backgroundColor: "white",
+  },
+});

@@ -9,7 +9,7 @@ import rootSaga from "./sagaExport";
 
 const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
-  key: "root",
+  key: "primary",
   storage,
 };
 const rootReducer = combineReducers({

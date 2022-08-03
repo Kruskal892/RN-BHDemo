@@ -18,8 +18,6 @@ export default function Logout({ navigation }) {
       <Button
         mode="outlined"
         onPress={onLogoutPressed}
-        backgroundColor="blue"
-        color = "white"
       >
         Logout
       </Button>

@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gest re-handler';
 import React from 'react'
 import { Provider } from 'react-redux'
 import { theme } from './src/style/theme'
