@@ -20,10 +20,12 @@ export default function Button({ mode, style, ...props }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: '100%',
+    width: 250,
     marginVertical: 10,
     paddingVertical: 2,
-    borderRadius: 10,
+    // borderRadius: 10,
+    backgroundColor: 'red',
+    marginTop: 70,
   },
   text: {
     fontWeight: 'bold',

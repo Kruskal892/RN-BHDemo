@@ -8,7 +8,8 @@ import Button from "../../Components/Button";
 import TextInput from "../../Components/TextInput";
 import { loginSuccess } from "../../Redux/redux";
 import { login } from "../../Redux/actions";
-// import validationSchema from '../../Constants/Validations';
+import Background from "../../Components/Background";
+
 export default function Login({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -59,34 +60,71 @@ export default function Login({ navigation }) {
     validationSchema,
   });
   return (
-    <View style={styles.container}>
-      <Header>Press to Login</Header>
-      <TextInput
-        label="name"
-        placeholder="Username"
-        value={values.username}
-        onChangeText={useCallback(handleChange("username"), [])}
-        autoCompleteType="name"
-        errorText={errors.username}
-        onBlur={handleBlur("username")}
-        touched={touched.username}
-      />
-      <TextInput
-        label="password"
-        placeholder="Password"
-        returnKeyType="done"
-        value={values.password}
-        onChangeText={useCallback(handleChange("password"), [])}
-        secureTextEntry
-        errorText={errors.password}
-        onBlur={handleBlur("password")}
-        touched={touched.password}
-      />
+    <Background>
+      <View style={styles.container}>
+        <Header>YOUR ART MUSEUM</Header>
+        <Text
+          style={{
+            color: "white",
+            textAlign: "left",
+            marginLeft: -100,
+            paddingVertical: 20,
+          }}
+        >
+          151 3rd St{"\n"}
+          San Francisco, CA 94103
+        </Text>
+        <TextInput
+          label="name"
+          placeholder="Username"
+          value={values.username}
+          onChangeText={useCallback(handleChange("username"), [])}
+          autoCompleteType="name"
+          errorText={errors.username}
+          onBlur={handleBlur("username")}
+          touched={touched.username}
+        />
+        <TextInput
+          label="password"
+          placeholder="Password"
+          returnKeyType="done"
+          value={values.password}
+          onChangeText={useCallback(handleChange("password"), [])}
+          secureTextEntry
+          errorText={errors.password}
+          onBlur={handleBlur("password")}
+          touched={touched.password}
+        />
 
-      <Button title="Submit" mode="contained" onPress={handleSubmit}>
-        Login
-      </Button>
-    </View>
+        <Text
+          onPress={() => {}}
+          style={{
+            color: "white",
+            fontSize: "12px",
+            marginRight: -120,
+            paddingTop: 5,
+          }}
+        >
+          Forgot your password?
+        </Text>
+
+        <Button title="Submit" mode="contained" onPress={handleSubmit}>
+          Login
+        </Button>
+
+        <Text
+          onPress={() => {}}
+          style={{
+            color: "white",
+            fontSize: "12px",
+            marginLeft: -120,
+            paddingTop: 5,
+          }}
+        >
+          Don't have an account!
+        </Text>
+      </View>
+    </Background>
   );
 }
 
@@ -95,8 +133,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    // backgroundColor: "#F5FCFF",
     padding: 24,
-    backgroundColor: "white",
+    textAlign: "center",
+    // backgroundColor: "white",
   },
 });

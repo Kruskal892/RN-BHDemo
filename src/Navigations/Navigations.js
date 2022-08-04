@@ -9,7 +9,7 @@ export default function Navigations(props) {
   const Stack = createStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         {user?.loggedIn ?
           <Stack.Screen name="Logout Screen" component={Logout} />
           :

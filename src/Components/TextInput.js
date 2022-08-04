@@ -6,7 +6,6 @@ import { theme } from '../style/theme'
 export default function TextInput({ touched, label, errorText, description, ...props }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Nhập {label}: </Text>
       <Input
         style={styles.input}
         selectionColor={theme.colors.primary}
@@ -29,19 +28,21 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    marginVertical: 12,
+    // marginVertical: 12,
   },
   input: {
     backgroundColor: 'white',
     height: 50,
     borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
+    // borderRadius: 10,
+    width: 250,
+    paddingLeft: 20,
   },
   description: {
     fontSize: 13,
     color: theme.colors.secondary,
     paddingTop: 8,
+    fontWeight: 'bold',
   },
   error: {
     fontSize: 13,
