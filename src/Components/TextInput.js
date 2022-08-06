@@ -14,20 +14,13 @@ export default function TextInput({
 }) {
   return (
     <View style={styles.container}>
-      <Controller
-        control={control}
-        name={name}
-        render={({ field: { value, onChange, onBlur } }) => (
-          <Input
-            style={styles.input}
-            selectionColor={theme.colors.primary}
-            underlineColor="transparent"
-            mode="outlined"
-            {...props}
-          />
-        )}
+      <Input
+        style={styles.input}
+        selectionColor={theme.colors.primary}
+        underlineColor="transparent"
+        mode="outlined"
+        {...props}
       />
-
       {description && !errorText ? (
         <Text style={styles.description}>{description}</Text>
       ) : null}
