@@ -9,6 +9,7 @@ import TextInput from "../../Components/TextInput";
 import { loginSuccess } from "../../Redux/redux";
 import { login } from "../../Redux/actions";
 import Background from "../../Components/Background";
+import { useForm, Controller } from "react-hook-form";
 
 export default function Login({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,15 +26,16 @@ export default function Login({ navigation }) {
       .min(6, "Password longer than 6 characters"),
   });
   const {
-    values,
+    // values,
     handleChange,
     handleBlur,
     handleSubmit,
     touched,
-    errors,
-    setFieldValue,
-  } = useFormik({
-    initialValues: {
+    // errors,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
       username: "",
       password: "",
     },
@@ -74,7 +76,47 @@ export default function Login({ navigation }) {
           151 3rd St{"\n"}
           San Francisco, CA 94103
         </Text>
-        <TextInput
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, values } }) => (
+            <TextInput
+              label="name"
+              placeholder="Username"
+              value={values.username}
+              onChangeText={useCallback(handleChange("username"), [])}
+              autoCompleteType="name"
+              errorText={errors.username}
+              onBlur={handleBlur("username")}
+              touched={touched.username}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, values } }) => (
+            <TextInput
+              label="password"
+              placeholder="Password"
+              returnKeyType="done"
+              value={values.password}
+              onChangeText={useCallback(handleChange("password"), [])}
+              secureTextEntry
+              errorText={errors.password}
+              onBlur={handleBlur("password")}
+              touched={touched.password}
+            />
+          )}
+        />
+
+        {/* <TextInput
           label="name"
           placeholder="Username"
           value={values.username}
@@ -94,7 +136,7 @@ export default function Login({ navigation }) {
           errorText={errors.password}
           onBlur={handleBlur("password")}
           touched={touched.password}
-        />
+        /> */}
 
         <Text
           onPress={() => {}}
@@ -108,7 +150,7 @@ export default function Login({ navigation }) {
           Forgot your password?
         </Text>
 
-        <Button title="Submit" mode="contained" onPress={handleSubmit}>
+        <Button title="Submit" mode="contained" onPress={handleSubmit(onSubmit)}>
           Login
         </Button>
 
@@ -137,5 +179,6 @@ const styles = StyleSheet.create({
     padding: 24,
     textAlign: "center",
     // backgroundColor: "white",
+    // fontSize: 30,
   },
 });
